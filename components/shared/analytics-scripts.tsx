@@ -1,10 +1,11 @@
 import Script from "next/script";
+import { getGoogleAdsId } from "@/lib/google-ads";
 
 /**
- * Injects Google Analytics (GA4) and/or Meta Pixel when the admin has
- * configured `googleAnalyticsId` / `metaPixelId` in the `/settings/website`
- * Firestore document. Both are optional — renders nothing for whichever
- * ID is absent, rather than shipping a broken/empty tracking snippet.
+ * Injects Google Analytics (GA4), Google Ads, and/or Meta Pixel when the admin
+ * has configured `googleAnalyticsId` / `metaPixelId` in the `/settings/website`
+ * Firestore document. Google Ads is injected unconditionally using the
+ * configured conversion ID; Analytics and Meta Pixel remain optional.
  */
 export function AnalyticsScripts({
   googleAnalyticsId,
@@ -13,24 +14,23 @@ export function AnalyticsScripts({
   googleAnalyticsId?: string | null;
   metaPixelId?: string | null;
 }) {
+  const googleAdsId = getGoogleAdsId();
+
   return (
     <>
-      {googleAnalyticsId && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-            strategy="lazyOnload"
-          />
-          <Script id="ga4-init" strategy="lazyOnload">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${googleAnalyticsId}');
-            `}
-          </Script>
-        </>
-      )}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
+        strategy="lazyOnload"
+      />
+      <Script id="google-ads-init" strategy="lazyOnload">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${googleAdsId}');
+          ${googleAnalyticsId ? `gtag('config', '${googleAnalyticsId}');` : ""}
+        `}
+      </Script>
 
       {metaPixelId && (
         <Script id="meta-pixel-init" strategy="lazyOnload">

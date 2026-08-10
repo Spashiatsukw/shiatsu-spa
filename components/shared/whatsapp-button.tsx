@@ -4,6 +4,7 @@ import { useLocale } from "next-intl";
 import { MessageCircle } from "lucide-react";
 import { Button, type buttonVariants } from "@/components/ui/button";
 import { generateWhatsappLink } from "@/lib/utils";
+import { trackBookNowConversion } from "@/lib/google-ads";
 import type { VariantProps } from "class-variance-authority";
 
 type WhatsAppButtonProps = {
@@ -35,9 +36,19 @@ export function WhatsAppButton({
       })
     : `https://wa.me/${phoneNumber.replace(/[^\d]/g, "")}`;
 
+  const handleClick = () => {
+    trackBookNowConversion();
+  };
+
   return (
     <Button asChild variant="whatsapp" size={size} className={className}>
-      <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={label}
+        onClick={handleClick}
+      >
         <MessageCircle aria-hidden="true" />
         {label}
       </a>

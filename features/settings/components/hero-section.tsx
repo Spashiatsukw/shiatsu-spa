@@ -1,6 +1,7 @@
 import { getLocale } from "next-intl/server";
 import { getHeroSettings } from "@/features/settings/api";
 import { OptimizedImage } from "@/components/shared";
+import { TrackableWhatsAppAnchor } from "@/components/shared/trackable-whatsapp-anchor";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { PUBLIC_ROUTES } from "@/lib/constants";
@@ -104,7 +105,9 @@ export async function HeroSection() {
                 size="lg"
                 className="rounded-full px-8 text-base font-semibold shadow-soft transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-card"
               >
-                <a href={hero?.buttonLink ?? "https://wa.me/96566555872"}>{buttonText}</a>
+                <TrackableWhatsAppAnchor href={hero?.buttonLink ?? "https://wa.me/96566555872"}>
+                  {buttonText}
+                </TrackableWhatsAppAnchor>
               </Button>
 
               <Button
