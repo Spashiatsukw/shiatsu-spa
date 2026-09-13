@@ -6,6 +6,7 @@ import { TestimonialsSection } from "@/features/testimonials";
 import { GallerySection } from "@/features/gallery";
 
 export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Shiatsu Spa Kuwait | Quality Touch",

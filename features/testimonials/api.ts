@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { collection, query, where, orderBy, getDocs, Timestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { db } from "@/lib/firebase/server-firestore";
 import { createConverter, timestampToIso } from "@/lib/firebase/firestore-helpers";
 import { REVALIDATE_TAGS, DEFAULT_REVALIDATE_SECONDS } from "@/lib/constants";
 import type { Testimonial } from "./types";

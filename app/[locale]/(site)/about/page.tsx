@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { AboutSection } from "@/features/settings";
 
 export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("about");

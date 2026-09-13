@@ -9,7 +9,7 @@ import {
   getDoc,
   Timestamp,
 } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { db } from "@/lib/firebase/server-firestore";
 import { createConverter, timestampToIso } from "@/lib/firebase/firestore-helpers";
 import { REVALIDATE_TAGS, DEFAULT_REVALIDATE_SECONDS } from "@/lib/constants";
 import type { Service } from "./types";

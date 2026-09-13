@@ -4,6 +4,7 @@ import { getActiveArticles, ArticleGrid } from "@/features/articles";
 import { FadeIn } from "@/components/shared";
 
 export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("articles");

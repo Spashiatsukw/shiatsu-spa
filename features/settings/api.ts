@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { db } from "@/lib/firebase/server-firestore";
 import { REVALIDATE_TAGS, DEFAULT_REVALIDATE_SECONDS } from "@/lib/constants";
 import type {
   HeroSettings,
