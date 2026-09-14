@@ -147,7 +147,7 @@ export default async function LocaleLayout({
         googleAnalyticsId={website?.googleAnalyticsId}
         metaPixelId={website?.metaPixelId}
       />
-      <NextIntlClientProvider messages={messages}>
+      <NextIntlClientProvider locale={locale} messages={messages}>
         <Providers>{children}</Providers>
       </NextIntlClientProvider>
     </div>
