@@ -1,14 +1,13 @@
 "use client";
 
 import { useTransition, type ComponentProps } from "react";
-import { useRouter, usePathname } from "@/i18n/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 type LanguageSwitcherProps = Pick<ComponentProps<"button">, "className">;
 
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
-  const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations("common");
@@ -18,7 +17,10 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 
   function handleSwitch() {
     startTransition(() => {
-      router.replace(pathname, { locale: nextLocale });
+      // Use a full navigation so the server renders the new locale from the
+      // URL immediately, instead of retaining the previous RSC locale state.
+      const localizedPath = pathname === "/" ? `/${nextLocale}` : `/${nextLocale}${pathname}`;
+      window.location.assign(localizedPath);
     });
   }
 
