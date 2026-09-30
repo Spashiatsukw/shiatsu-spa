@@ -1,8 +1,9 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { getCompanySettings } from "../api";
 import { EmptyState, FadeIn } from "@/components/shared";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Eye, Target } from "lucide-react";
+import type { Locale } from "@/i18n/routing";
 
 const ENGLISH_ABOUT =
   "Shiatsu Spa is an integrated men's destination for grooming and relaxation in Kuwait, combining authentic therapeutic techniques with modern luxury standards. We are not just a grooming place; we are a space designed for the man who values his time and seeks a real result: physical relaxation, mental clarity, and genuine recovery.\nSince opening in 2023, we have built our reputation on precision, complete privacy, and a level of service worthy of clients who expect the best and accept nothing less.";
@@ -17,9 +18,8 @@ function usable(value: string | undefined, fallback: string) {
   return value && !value.includes("[TODO:") ? value : fallback;
 }
 
-export async function AboutSection() {
-  const locale = await getLocale();
-  const t = await getTranslations("about");
+export async function AboutSection({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "about" });
   const company = await getCompanySettings();
 
   if (!company) {

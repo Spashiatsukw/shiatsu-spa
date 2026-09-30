@@ -1,7 +1,7 @@
-import { getLocale } from "next-intl/server";
 import { buildMapEmbedUrl } from "../lib/google-maps";
 import { BranchDetailView } from "./branch-detail-view";
 import type { Branch } from "../types";
+import type { Locale } from "@/i18n/routing";
 
 function buildFallbackQuery(branch: Branch, locale: string): string {
   const name = locale === "ar" ? branch.name.ar : branch.name.en;
@@ -10,8 +10,7 @@ function buildFallbackQuery(branch: Branch, locale: string): string {
   return [name, address, country].filter(Boolean).join(", ");
 }
 
-export async function BranchDetail({ branch }: { branch: Branch }) {
-  const locale = await getLocale();
+export async function BranchDetail({ branch, locale }: { branch: Branch; locale: Locale }) {
   const fallbackQuery = buildFallbackQuery(branch, locale);
   const embedUrl = await buildMapEmbedUrl(
     branch.googleMapsUrl,

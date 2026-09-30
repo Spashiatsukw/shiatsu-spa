@@ -1,15 +1,15 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Phone, Mail, Clock } from "lucide-react";
 import { getContactSettings, getWebsiteSettings } from "../api";
 import { getActiveBranches } from "@/features/branches/api";
 import { BranchDetail } from "@/features/branches/components/branch-detail";
 import { WhatsAppButton, EmptyState, FadeIn } from "@/components/shared";
 import { Card, CardContent } from "@/components/ui/card";
+import type { Locale } from "@/i18n/routing";
 
-export async function ContactSection() {
-  const locale = await getLocale();
-  const t = await getTranslations("common");
-  const tContact = await getTranslations("contact");
+export async function ContactSection({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "common" });
+  const tContact = await getTranslations({ locale, namespace: "contact" });
   const [contact, website, branches] = await Promise.all([
     getContactSettings(),
     getWebsiteSettings(),
@@ -120,7 +120,7 @@ export async function ContactSection() {
         ) : (
           <div className="flex flex-col gap-10">
             {branches.map((branch) => (
-              <BranchDetail key={branch.id} branch={branch} />
+              <BranchDetail key={branch.id} branch={branch} locale={locale} />
             ))}
           </div>
         )}

@@ -4,20 +4,23 @@ import { getActiveServices, ServiceGrid } from "@/features/services";
 import { getActiveCategories } from "@/features/categories";
 import { getContactSettings } from "@/features/settings";
 import { FadeIn } from "@/components/shared";
+import type { Locale } from "@/i18n/routing";
 
 export const revalidate = 3600;
 export const dynamic = "force-static";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("services");
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "services" });
   return {
     title: t("heading"),
     description: t("subheading"),
   };
 }
 
-export default async function ServicesPage() {
-  const t = await getTranslations("services");
+export default async function ServicesPage({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "services" });
   const [services, categories, contact] = await Promise.all([
     getActiveServices(),
     getActiveCategories(),
@@ -38,7 +41,7 @@ export default async function ServicesPage() {
       </FadeIn>
 
       <FadeIn delay={0.1}>
-        <ServiceGrid
+          <ServiceGrid
           services={services}
           categories={categories}
           whatsappPhone={contact?.whatsapp}

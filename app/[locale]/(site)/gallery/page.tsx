@@ -2,20 +2,23 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getActiveGalleryItems, GalleryGrid } from "@/features/gallery";
 import { FadeIn } from "@/components/shared";
+import type { Locale } from "@/i18n/routing";
 
 export const revalidate = 3600;
 export const dynamic = "force-static";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("gallery");
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "gallery" });
   return {
     title: t("heading"),
     description: t("subheading"),
   };
 }
 
-export default async function GalleryPage() {
-  const t = await getTranslations("gallery");
+export default async function GalleryPage({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "gallery" });
   const items = await getActiveGalleryItems();
 
   return (
