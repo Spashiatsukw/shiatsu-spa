@@ -22,8 +22,13 @@ export async function HeroSection() {
     buttonText: isArabic ? "احجز الآن" : "Book Now",
   };
 
+  const containsArabic = (value: string) => /[\u0600-\u06FF]/.test(value);
   const cmsText = (value: string | undefined, defaultValue: string) =>
-    value && !value.includes("[TODO:") ? value : defaultValue;
+    value &&
+    !value.includes("[TODO:") &&
+    (isArabic || !containsArabic(value))
+      ? value
+      : defaultValue;
 
   const eyebrow = fallback.eyebrow;
   const title = cmsText(hero ? (isArabic ? hero.title.ar : hero.title.en) : undefined, fallback.title);
