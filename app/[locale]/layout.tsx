@@ -11,6 +11,7 @@ import {
 } from "@/features/settings/api";
 import { StructuredData } from "@/components/shared/structured-data";
 import { AnalyticsScripts } from "@/components/shared/analytics-scripts";
+import { LocaleDocumentAttributes } from "@/components/layout/locale-document-attributes";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://shiatsuspakw.com";
 
@@ -142,6 +143,7 @@ export default async function LocaleLayout({
 
   return (
     <div lang={locale} dir={direction}>
+      <LocaleDocumentAttributes locale={locale} />
       <StructuredData locale={locale} />
       <AnalyticsScripts
         googleAnalyticsId={website?.googleAnalyticsId}
