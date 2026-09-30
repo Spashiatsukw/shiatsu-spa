@@ -11,6 +11,15 @@ type TestimonialsSliderProps = {
   locale: string;
 };
 
+const ENGLISH_TESTIMONIALS: Record<string, string> = {
+  "Muhamd Aladwany":
+    "The place is clean, the staff are experienced and respectful, and it is perfect for anyone looking for comfort in a clean and welcoming place. Excellent care, attention, and a variety of massage services. Even the hospitality is exceptional — definitely worth trying.",
+  "Only Sef":
+    "If there were more than five stars, I would give them all. This is truly excellent work; I have never experienced a massage in Kuwait at this level. Thank you Thamer for the warm hospitality and welcome from arrival to departure. ❤️",
+  "Yousef Talal":
+    "Many thanks to the receptionist Mohammed and therapist Rosie. A wonderful experience, excellent service, and a price that matches the quality. I found no negatives at all in this wonderful place.",
+};
+
 export function TestimonialsSlider({ testimonials, locale }: TestimonialsSliderProps) {
   const isRtl = locale === "ar";
   const [startIndex, setStartIndex] = useState(0);
@@ -65,7 +74,9 @@ export function TestimonialsSlider({ testimonials, locale }: TestimonialsSliderP
           }}
         >
           {testimonials.map((testimonial) => {
-            const content = isRtl ? testimonial.content.ar : testimonial.content.en;
+            const content = isRtl
+              ? testimonial.content.ar
+              : ENGLISH_TESTIMONIALS[testimonial.clientName] || testimonial.content.en;
             const initial = testimonial.clientName?.trim().charAt(0).toUpperCase() || "?";
 
             return (

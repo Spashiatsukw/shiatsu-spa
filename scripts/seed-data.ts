@@ -714,7 +714,7 @@ export const testimonialsSeed: TestimonialSeed[] = [
   {
     clientName: "Muhamd Aladwany",
     content: {
-      en: "المكان نظيف العماله ذو خبره جيده و احترام مناسب للاشخاص الي يبحثون عن الراحه في الاماكن النظيفه و المحترمه\nرعايه و اهتمام و خدمات مساج متنوعه\nو حتى الظيافه مهتمين فيها مكان يستاهل التجربه",
+      en: "The place is clean, the staff are experienced and respectful, and it is perfect for anyone looking for comfort in a clean and welcoming place. Excellent care, attention, and a variety of massage services. Even the hospitality is exceptional — definitely worth trying.",
       ar: "المكان نظيف العماله ذو خبره جيده و احترام مناسب للاشخاص الي يبحثون عن الراحه في الاماكن النظيفه و المحترمه\nرعايه و اهتمام و خدمات مساج متنوعه\nو حتى الظيافه مهتمين فيها مكان يستاهل التجربه",
     },
     rating: 5,
@@ -725,7 +725,7 @@ export const testimonialsSeed: TestimonialSeed[] = [
   {
     clientName: "Only Sef",
     content: {
-      en: "في اكثر كن خمس نجوم ؟ بالضبط هذا الشغل الصح بعمري ماجصلت مساج بالكويت نفس مستوى هذا المعهد\nومشكور ثامر على حسن الضيافه والاستقبال بالدخول والخروج ❤️",
+      en: "If there were more than five stars, I would give them all. This is truly excellent work; I have never experienced a massage in Kuwait at this level. Thank you Thamer for the warm hospitality and welcome from arrival to departure. ❤️",
       ar: "في اكثر كن خمس نجوم ؟ بالضبط هذا الشغل الصح بعمري ماجصلت مساج بالكويت نفس مستوى هذا المعهد\nومشكور ثامر على حسن الضيافه والاستقبال بالدخول والخروج ❤️",
     },
     rating: 5,
@@ -736,7 +736,7 @@ export const testimonialsSeed: TestimonialSeed[] = [
   {
     clientName: "Yousef Talal",
     content: {
-      en: "كا الشكر حق موظف الاستقبال محمد و العامل روزي\nتجربة رائعة وخدمة ولا اروح والسعر مقابل الخدمة يستحق\nلا يوجد اي ملاحظات او سلبيات وجدتها في هذا المكان الرائع",
+      en: "Many thanks to the receptionist Mohammed and therapist Rosie. A wonderful experience, excellent service, and a price that matches the quality. I found no negatives at all in this wonderful place.",
       ar: "كا الشكر حق موظف الاستقبال محمد و العامل روزي\nتجربة رائعة وخدمة ولا اروح والسعر مقابل الخدمة يستحق\nلا يوجد اي ملاحظات او سلبيات وجدتها في هذا المكان الرائع",
     },
     rating: 5,
