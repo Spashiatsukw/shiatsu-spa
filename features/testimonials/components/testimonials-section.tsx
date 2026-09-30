@@ -1,12 +1,12 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Star } from "lucide-react";
 import { getActiveTestimonials } from "../api";
 import { EmptyState, FadeIn } from "@/components/shared";
 import { TestimonialsSlider } from "./testimonials-slider";
+import type { Locale } from "@/i18n/routing";
 
-export async function TestimonialsSection() {
-  const locale = await getLocale();
-  const tHome = await getTranslations("home");
+export async function TestimonialsSection({ locale }: { locale: Locale }) {
+  const tHome = await getTranslations({ locale, namespace: "home" });
   const testimonials = await getActiveTestimonials();
 
   return (

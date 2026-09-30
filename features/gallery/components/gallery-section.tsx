@@ -4,11 +4,12 @@ import { GallerySlider } from "./gallery-slider";
 import { EmptyState, FadeIn } from "@/components/shared";
 import { Link } from "@/i18n/navigation";
 import { PUBLIC_ROUTES } from "@/lib/constants";
+import type { Locale } from "@/i18n/routing";
 
-export async function GallerySection() {
-  const tNav = await getTranslations("nav");
-  const tHome = await getTranslations("home");
-  const tGallery = await getTranslations("gallery");
+export async function GallerySection({ locale }: { locale: Locale }) {
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tHome = await getTranslations({ locale, namespace: "home" });
+  const tGallery = await getTranslations({ locale, namespace: "gallery" });
   const items = await getActiveGalleryItems();
 
   return (

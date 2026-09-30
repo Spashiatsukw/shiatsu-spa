@@ -29,6 +29,20 @@ export default function middleware(request: NextRequest) {
     return handleAdminRoute(request, pathname);
   }
 
+  // Keep the locale available to Server Components on explicitly-prefixed
+  // routes. This is important for pages that call getLocale() directly;
+  // relying only on the locale cookie can otherwise fall back to Arabic even
+  // when the URL is /en/....
+  const localeMatch = pathname.match(/^\/(ar|en)(?:\/|$)/);
+  const explicitLocale = localeMatch?.[1];
+  if (explicitLocale) {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("X-NEXT-INTL-LOCALE", explicitLocale);
+    const response = NextResponse.next({ request: { headers: requestHeaders } });
+    response.cookies.set("NEXT_LOCALE", explicitLocale, { sameSite: "lax", path: "/" });
+    return response;
+  }
+
   return intlMiddleware(request);
 }
 

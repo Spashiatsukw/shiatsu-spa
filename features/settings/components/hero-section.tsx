@@ -1,4 +1,3 @@
-import { getLocale } from "next-intl/server";
 import { getHeroSettings } from "@/features/settings/api";
 import { OptimizedImage } from "@/components/shared";
 import { TrackableWhatsAppAnchor } from "@/components/shared/trackable-whatsapp-anchor";
@@ -6,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { PUBLIC_ROUTES } from "@/lib/constants";
 import { Award, ShieldCheck, Sparkles } from "lucide-react";
+import type { Locale } from "@/i18n/routing";
 
-export async function HeroSection() {
-  const locale = await getLocale();
+export async function HeroSection({ locale }: { locale: Locale }) {
   const hero = await getHeroSettings();
   const isArabic = locale === "ar";
 

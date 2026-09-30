@@ -1,4 +1,4 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { getActiveBranches } from "@/features/branches/api";
 import { resolveBranchMapPins } from "@/features/branches/lib/google-maps";
 import { BranchInfoCardHome } from "@/features/branches/components/branch-info-card-home";
@@ -6,11 +6,11 @@ import { KuwaitBranchesMap } from "@/features/branches/components/kuwait-branche
 import { EmptyState, FadeIn } from "@/components/shared";
 import { Link } from "@/i18n/navigation";
 import { PUBLIC_ROUTES } from "@/lib/constants";
+import type { Locale } from "@/i18n/routing";
 
-export async function BranchesSection() {
-  const locale = await getLocale();
-  const tNav = await getTranslations("nav");
-  const tBranches = await getTranslations("branches");
+export async function BranchesSection({ locale }: { locale: Locale }) {
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tBranches = await getTranslations({ locale, namespace: "branches" });
   const branches = await getActiveBranches();
   const mapPins = await resolveBranchMapPins(branches, locale);
 

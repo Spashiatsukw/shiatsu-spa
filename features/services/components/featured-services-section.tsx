@@ -6,10 +6,11 @@ import { ServiceCard } from "./service-card";
 import { EmptyState, FadeIn } from "@/components/shared";
 import { Link } from "@/i18n/navigation";
 import { PUBLIC_ROUTES } from "@/lib/constants";
+import type { Locale } from "@/i18n/routing";
 
-export async function FeaturedServicesSection() {
-  const tCommon = await getTranslations("common");
-  const tHome = await getTranslations("home");
+export async function FeaturedServicesSection({ locale }: { locale: Locale }) {
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tHome = await getTranslations({ locale, namespace: "home" });
   const [services, contact] = await Promise.all([
     getFeaturedServices(),
     getContactSettings(),

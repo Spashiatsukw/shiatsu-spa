@@ -1,8 +1,8 @@
-import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { PUBLIC_ROUTES } from "@/lib/constants";
 import { FadeIn, OptimizedImage } from "@/components/shared";
 import { ArrowUpRight } from "lucide-react";
+import type { Locale } from "@/i18n/routing";
 
 /**
  * Static brand copy — the client does not want this section editable
@@ -50,10 +50,7 @@ const WIDE_IMAGE = {
   alt: { en: "Luxury spa atmosphere", ar: "أجواء السبا الفاخرة" },
 } as const;
 
-export async function AboutTeaser() {
-  const locale = await getLocale();
-  const t = await getTranslations("nav");
-
+export async function AboutTeaser({ locale }: { locale: Locale }) {
   const welcome = locale === "ar" ? COMPANY.welcome.ar : COMPANY.welcome.en;
   const name = locale === "ar" ? COMPANY.name.ar : COMPANY.name.en;
   const teaser = locale === "ar" ? COMPANY.teaser.ar : COMPANY.teaser.en;
